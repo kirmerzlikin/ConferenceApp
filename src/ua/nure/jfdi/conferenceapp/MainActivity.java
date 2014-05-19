@@ -109,10 +109,10 @@ public class MainActivity extends FragmentActivity implements
 		@Override
 		public Fragment getItem(int position) {
 			Fragment fragment;
-			if (position == 1) {
-				fragment = new ChatFragment();
+			if (position == 0) {
+				fragment = new FeedFragment();
 				Bundle args = new Bundle();
-				args.putInt(ChatFragment.ARG_SECTION_NUMBER, position + 1);
+				args.putInt(FeedFragment.ARG_SECTION_NUMBER, position + 1);
 				fragment.setArguments(args);
 			} else {
 				fragment = new ChatFragment();
