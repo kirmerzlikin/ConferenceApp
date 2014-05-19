@@ -2,28 +2,15 @@ package ua.nure.jfdi.conferenceapp;
 
 import java.util.Locale;
 
-import android.R.drawable;
 import android.app.ActionBar;
 import android.app.FragmentTransaction;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
-import android.view.Gravity;
-import android.view.LayoutInflater;
 import android.view.Menu;
-import android.view.View;
-import android.view.View.OnClickListener;
-import android.view.ViewGroup;
-import android.widget.Button;
-import android.widget.EditText;
-import android.widget.ImageView;
-import android.widget.LinearLayout;
-import android.widget.ScrollView;
-import android.widget.TextView;
 
 public class MainActivity extends FragmentActivity implements
 		ActionBar.TabListener {
@@ -121,9 +108,6 @@ public class MainActivity extends FragmentActivity implements
 
 		@Override
 		public Fragment getItem(int position) {
-			// getItem is called to instantiate the fragment for the given page.
-			// Return a DummySectionFragment (defined as a static inner class
-			// below) with the page number as its lone argument.
 			Fragment fragment;
 			if (position == 1) {
 				fragment = new ChatFragment();
@@ -156,92 +140,5 @@ public class MainActivity extends FragmentActivity implements
 			}
 			return null;
 		}
-	}
-
-	/**
-	 * A dummy fragment representing a section of the app, but that simply
-	 * displays dummy text.
-	 */
-	public static class ChatFragment extends Fragment {
-		/**
-		 * The fragment argument representing the section number for this
-		 * fragment.
-		 */
-		public static final String ARG_SECTION_NUMBER = "section_number";
-
-		public ChatFragment() {
-		}
-
-		@Override
-		public View onCreateView(LayoutInflater inflater, ViewGroup container,
-				Bundle savedInstanceState) {
-			final View rootView = inflater.inflate(R.layout.fragment_chat,
-					container, false);
-			final EditText editText = (EditText) rootView
-					.findViewById(R.id.messageEdit);
-			final ViewGroup messagesContainer = (ViewGroup) rootView
-					.findViewById(R.id.messagesContainer);
-			final ScrollView scrollContainer = (ScrollView) rootView
-					.findViewById(R.id.scrollContainer);
-			Button sendMessageButton = (Button) rootView
-					.findViewById(R.id.sendButton);
-			sendMessageButton.setOnClickListener(new OnClickListener() {
-
-				@Override
-				public void onClick(View v) {
-					showMessage(editText, false, rootView, messagesContainer,
-							scrollContainer);
-					showMessage(editText, true, rootView, messagesContainer,
-							scrollContainer);
-				}
-			});
-
-			return rootView;
-		}
-
-		void showMessage(EditText editText, boolean leftSide, View root,
-				final ViewGroup messagesContainer,
-				final ScrollView scrollContainer) {
-			if (!leftSide) {
-				final TextView textView = new TextView(root.getContext());
-				textView.setTextColor(Color.BLACK);
-				textView.setText(editText.getText().toString());
-				LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(
-						LinearLayout.LayoutParams.WRAP_CONTENT,
-						LinearLayout.LayoutParams.WRAP_CONTENT);
-				int bgRes = R.drawable.right_message_bg;
-				params.gravity = Gravity.RIGHT;
-				textView.setLayoutParams(params);
-				textView.setBackgroundResource(bgRes);
-				messagesContainer.addView(textView);
-				scrollContainer.scrollTo(0, scrollContainer.getBottom());				
-				// editText.setText("");
-			} else {
-				final LinearLayout ll = new LinearLayout(root.getContext());
-				ll.setLayoutParams(new LinearLayout.LayoutParams(
-						LinearLayout.LayoutParams.WRAP_CONTENT,
-						LinearLayout.LayoutParams.WRAP_CONTENT));
-				final ImageView iv = new ImageView(ll.getContext());
-				LinearLayout.LayoutParams paramsIV = new LinearLayout.LayoutParams(
-						30, 30);
-				paramsIV.gravity = Gravity.BOTTOM;
-				iv.setLayoutParams(paramsIV);
-				iv.setImageResource(drawable.ic_dialog_email);
-				ll.addView(iv);
-				final TextView textViewM = new TextView(ll.getContext());
-				textViewM.setTextColor(Color.BLACK);
-				textViewM.setText(editText.getText().toString());
-				textViewM.setBackgroundResource(R.drawable.left_message_bg);
-				LinearLayout.LayoutParams paramsTV = new LinearLayout.LayoutParams(
-						LinearLayout.LayoutParams.WRAP_CONTENT,
-						LinearLayout.LayoutParams.WRAP_CONTENT);
-				textViewM.setLayoutParams(paramsTV);
-				ll.addView(textViewM);
-				messagesContainer.addView(ll);
-				scrollContainer.scrollTo(0, messagesContainer.getBottom());
-				editText.setText("");
-			}
-		}
-	}
-
+	}	
 }
