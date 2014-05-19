@@ -38,9 +38,20 @@
         android:layout_height="wrap_content"
         android:layout_alignLeft="@+id/feed_item_title"
         android:layout_below="@id/feed_item_title"
-        android:layout_marginTop="1dip"
         android:layout_gravity="center_vertical|right"
+        android:layout_marginTop="1dip"
+        android:maxHeight="35dp"
         android:text="Feed item text."
         android:textColor="#343434"
-        android:textSize="10dip" />
+        android:textSize="12dip" />
+
+    <TextView
+        android:id="@+id/feed_item_show_more"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_below="@id/feed_item_text"
+        android:text="Show more"
+        android:textSize="8dp" />
+
 </RelativeLayout>
