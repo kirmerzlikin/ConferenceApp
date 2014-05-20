@@ -18,10 +18,9 @@ import android.widget.TextView;
 public class ChatFragment extends Fragment {
 
 	/**
-	 * The fragment argument representing the section number for this
-	 * fragment.
+	 * The fragment argument representing the section number for this fragment.
 	 */
-	
+
 	public static final String ARG_SECTION_NUMBER = "section_number";
 
 	public ChatFragment() {
@@ -44,18 +43,18 @@ public class ChatFragment extends Fragment {
 
 			@Override
 			public void onClick(View v) {
-				showMessage(editText, null, null,  false, rootView, messagesContainer,
-						scrollContainer);
-				showMessage(editText, "Иван Петров", "20.05.2014", true, rootView, messagesContainer,
-						scrollContainer);
+				showMessage(editText, null, null, false, rootView,
+						messagesContainer, scrollContainer);
+				showMessage(editText, "Иван Петров", "20.05.2014", true,
+						rootView, messagesContainer, scrollContainer);
 			}
 		});
 
 		return rootView;
 	}
 
-	void showMessage(EditText editText, String author, String date , boolean leftSide, View root,
-			final ViewGroup messagesContainer,
+	void showMessage(EditText editText, String author, String date,
+			boolean leftSide, View root, final ViewGroup messagesContainer,
 			final ScrollView scrollContainer) {
 		if (!leftSide) {
 			final TextView textView = new TextView(root.getContext());
@@ -69,10 +68,11 @@ public class ChatFragment extends Fragment {
 			textView.setLayoutParams(params);
 			textView.setBackgroundResource(bgRes);
 			messagesContainer.addView(textView);
-			scrollContainer.scrollTo(0, messagesContainer.getBottom());				
+			scrollContainer.scrollTo(0, messagesContainer.getBottom());
 			// editText.setText("");
 		} else {
-			final LinearLayout linearLayout = new LinearLayout(root.getContext());
+			final LinearLayout linearLayout = new LinearLayout(
+					root.getContext());
 			linearLayout.setLayoutParams(new LinearLayout.LayoutParams(
 					LinearLayout.LayoutParams.WRAP_CONTENT,
 					LinearLayout.LayoutParams.WRAP_CONTENT));
@@ -83,13 +83,15 @@ public class ChatFragment extends Fragment {
 			imageView.setLayoutParams(paramsIV);
 			imageView.setImageResource(R.drawable.user_default);
 			linearLayout.addView(imageView);
-			final LinearLayout linearLayoutMessage = new LinearLayout(root.getContext());
+			final LinearLayout linearLayoutMessage = new LinearLayout(
+					root.getContext());
 			linearLayout.setLayoutParams(new LinearLayout.LayoutParams(
 					LinearLayout.LayoutParams.WRAP_CONTENT,
 					LinearLayout.LayoutParams.WRAP_CONTENT));
 			linearLayoutMessage.setOrientation(LinearLayout.VERTICAL);
 			linearLayout.addView(linearLayoutMessage);
-			final TextView textViewAuthor = new TextView(linearLayout.getContext());
+			final TextView textViewAuthor = new TextView(
+					linearLayout.getContext());
 			textViewAuthor.setTextColor(Color.BLACK);
 			textViewAuthor.setText(author + ", " + date);
 			LinearLayout.LayoutParams paramsTVA = new LinearLayout.LayoutParams(
