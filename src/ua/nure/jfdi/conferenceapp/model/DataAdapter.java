@@ -8,7 +8,6 @@ public class DataAdapter {
 
 	private SharedPreferences sharedPreferences;
 	private final String NAME = "name";
-	private final String SURNAME = "surname";
 	private final String MAC = "mac";
 
 	public DataAdapter(Context context) {
@@ -19,7 +18,6 @@ public class DataAdapter {
 	public void setUserName(String name, String surname) {
 		Editor editor = sharedPreferences.edit();
 		editor.putString(NAME, name);
-		editor.putString(SURNAME, surname);
 		editor.commit();
 	}
 
@@ -42,10 +40,4 @@ public class DataAdapter {
 		String name = sharedPreferences.getString(NAME, "");
 		return name;
 	}
-
-	public String getUserSurname() {
-		String surname = sharedPreferences.getString(SURNAME, "");
-		return surname;
-	}
-
 }
