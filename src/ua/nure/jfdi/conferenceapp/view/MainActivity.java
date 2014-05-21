@@ -1,12 +1,9 @@
 package ua.nure.jfdi.conferenceapp.view;
 
+import java.lang.reflect.Field;
 import java.util.Locale;
 
 import ua.nure.jfdi.conferenceapp.R;
-import ua.nure.jfdi.conferenceapp.R.id;
-import ua.nure.jfdi.conferenceapp.R.layout;
-import ua.nure.jfdi.conferenceapp.R.menu;
-import ua.nure.jfdi.conferenceapp.R.string;
 import android.app.ActionBar;
 import android.app.FragmentTransaction;
 import android.os.Bundle;
@@ -119,6 +116,21 @@ public class MainActivity extends FragmentActivity implements
 				Bundle args = new Bundle();
 				args.putInt(FeedFragment.ARG_SECTION_NUMBER, position + 1);
 				fragment.setArguments(args);
+				try {
+					Field field = SectionsPagerAdapter.class
+							.getDeclaredField("this$0");
+					field.setAccessible(true);
+					FragmentActivity activity = (FragmentActivity) field
+							.get(this);
+					FeedFragment ff = (FeedFragment) fragment;
+					ff.runTimer(activity);
+				} catch (NoSuchFieldException e) {
+					e.printStackTrace();
+				} catch (IllegalArgumentException e) {
+					e.printStackTrace();
+				} catch (IllegalAccessException e) {
+					e.printStackTrace();
+				}
 			} else {
 				fragment = new ChatFragment();
 				Bundle args = new Bundle();

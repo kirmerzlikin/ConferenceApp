@@ -3,9 +3,6 @@ package ua.nure.jfdi.conferenceapp.view;
 import java.util.List;
 
 import ua.nure.jfdi.conferenceapp.R;
-import ua.nure.jfdi.conferenceapp.R.drawable;
-import ua.nure.jfdi.conferenceapp.R.id;
-import ua.nure.jfdi.conferenceapp.R.layout;
 import ua.nure.jfdi.conferenceapp.entities.Notice;
 import android.annotation.TargetApi;
 import android.os.Build;
@@ -21,6 +18,7 @@ public class FeedAdapter extends BaseAdapter {
 
 	private List<Notice> data;
 	private LayoutInflater inflater = null;
+	
 
 	public FeedAdapter(LayoutInflater inflater, List<Notice> data) {
 		this.data = data;
@@ -59,7 +57,6 @@ public class FeedAdapter extends BaseAdapter {
 		textButton.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				// TODO Auto-generated method stub
 				if (text.getMaxHeight() == 40) {
 					text.setMaxHeight(1000);
 					textButton.setText("Hide");
@@ -79,4 +76,7 @@ public class FeedAdapter extends BaseAdapter {
 		return convertView;
 	}
 
+	public void addNotice(Notice notice) {
+		data.add(notice);
+	}	
 }
