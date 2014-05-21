@@ -27,11 +27,11 @@ public class FeedFragment extends Fragment {
 				container, false);
 		ListView listView = (ListView) rootView.findViewById(R.id.list);// stub
 		List<Notice> list = new ArrayList<Notice>();// stub
-		list.add(new Notice("Title1", "Text1", null, 641564648));// stub
+		list.add(new Notice("Title1", "Text1",  641564648));// stub
 		list.add(new Notice(
 				"Title1",
 				"Text2Text2Text2Text2Text2Text2Text2Text2Text2Text2Text2Text2Text2Text2Text2Text2Text2Text2Text2Text2Text2Text2Text2Text2Text2Text2Text2Text2Text2Text2Text2Text2Text2Text2Text2Text2Text2Text2Text2Text2Text2Text2Text2Text2Text2Text2",
-				null, 456465546));// stub
+				456465546));// stub
 		FeedAdapter adapter = new FeedAdapter(inflater, list);
 		listView.setAdapter(adapter);
 		return rootView;
