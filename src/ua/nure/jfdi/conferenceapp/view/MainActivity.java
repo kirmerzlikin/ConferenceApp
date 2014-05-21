@@ -1,7 +1,12 @@
-package ua.nure.jfdi.conferenceapp;
+package ua.nure.jfdi.conferenceapp.view;
 
 import java.util.Locale;
 
+import ua.nure.jfdi.conferenceapp.R;
+import ua.nure.jfdi.conferenceapp.R.id;
+import ua.nure.jfdi.conferenceapp.R.layout;
+import ua.nure.jfdi.conferenceapp.R.menu;
+import ua.nure.jfdi.conferenceapp.R.string;
 import android.app.ActionBar;
 import android.app.FragmentTransaction;
 import android.os.Bundle;

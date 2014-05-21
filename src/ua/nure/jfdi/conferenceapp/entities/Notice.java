@@ -1,4 +1,4 @@
-package ua.nure.jfdi.conferenceapp;
+package ua.nure.jfdi.conferenceapp.entities;
 
 import java.util.Date;
 

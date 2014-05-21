@@ -1,6 +1,12 @@
-package ua.nure.jfdi.conferenceapp;
+package ua.nure.jfdi.conferenceapp.view;
 
 import java.util.List;
+
+import ua.nure.jfdi.conferenceapp.R;
+import ua.nure.jfdi.conferenceapp.R.drawable;
+import ua.nure.jfdi.conferenceapp.R.id;
+import ua.nure.jfdi.conferenceapp.R.layout;
+import ua.nure.jfdi.conferenceapp.entities.Notice;
 import android.annotation.TargetApi;
 import android.os.Build;
 import android.view.LayoutInflater;
@@ -54,11 +60,11 @@ public class FeedAdapter extends BaseAdapter {
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
-				if (text.getMaxHeight() == 35) {
+				if (text.getMaxHeight() == 40) {
 					text.setMaxHeight(1000);
 					textButton.setText("Hide");
 				} else {
-					text.setMaxHeight(35);
+					text.setMaxHeight(40);
 					textButton.setText("Show more");
 				}
 			}

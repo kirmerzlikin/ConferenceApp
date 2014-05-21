@@ -1,4 +1,4 @@
-package ua.nure.jfdi.conferenceapp;
+package ua.nure.jfdi.conferenceapp.model;
 
 import android.content.Context;
 import android.content.SharedPreferences;

@@ -1,5 +1,9 @@
-package ua.nure.jfdi.conferenceapp;
+package ua.nure.jfdi.conferenceapp.view;
 
+import ua.nure.jfdi.conferenceapp.R;
+import ua.nure.jfdi.conferenceapp.R.drawable;
+import ua.nure.jfdi.conferenceapp.R.id;
+import ua.nure.jfdi.conferenceapp.R.layout;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;

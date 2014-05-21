@@ -1,8 +1,10 @@
-package ua.nure.jfdi.conferenceapp;
+package ua.nure.jfdi.conferenceapp.view;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import ua.nure.jfdi.conferenceapp.R;
+import ua.nure.jfdi.conferenceapp.entities.Notice;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -27,10 +29,13 @@ public class FeedFragment extends Fragment {
 				container, false);
 		ListView listView = (ListView) rootView.findViewById(R.id.list);// stub
 		List<Notice> list = new ArrayList<Notice>();// stub
-		list.add(new Notice("Title1", "Text1",  641564648));// stub
+		list.add(new Notice("Title1", "Text1", 641564648));// stub
 		list.add(new Notice(
 				"Title1",
-				"Text2Text2Text2Text2Text2Text2Text2Text2Text2Text2Text2Text2Text2Text2Text2Text2Text2Text2Text2Text2Text2Text2Text2Text2Text2Text2Text2Text2Text2Text2Text2Text2Text2Text2Text2Text2Text2Text2Text2Text2Text2Text2Text2Text2Text2Text2",
+				"Text2Text2Text2Text2Text2Text2Text2Text2Text2Text2T"
+						+ "ext2Text2Text2Text2Text2Text2Text2Text2Text2Text2Te"
+						+ "xt2Text2Text2Text2Text2Text2Text2Text2Text2Text2Tex"
+						+ "t2Text2Text2Text2Text2Text2Text2Text2Text2Text2Text2Text2Text2Text2Text2Text2",
 				456465546));// stub
 		FeedAdapter adapter = new FeedAdapter(inflater, list);
 		listView.setAdapter(adapter);
