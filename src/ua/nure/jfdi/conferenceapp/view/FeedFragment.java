@@ -5,8 +5,6 @@ import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
 
-import javax.xml.datatype.Duration;
-
 import ua.nure.jfdi.conferenceapp.R;
 import ua.nure.jfdi.conferenceapp.entities.Notice;
 import android.app.Activity;
