@@ -3,7 +3,6 @@ package ua.nure.jfdi.conferenceapp.view;
 import java.util.Locale;
 
 import ua.nure.jfdi.conferenceapp.R;
-import ua.nure.jfdi.conferenceapp.model.FeedHandler;
 import android.app.ActionBar;
 import android.app.FragmentTransaction;
 import android.os.Bundle;

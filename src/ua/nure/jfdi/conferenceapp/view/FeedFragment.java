@@ -59,7 +59,7 @@ public class FeedFragment extends Fragment implements IUpdateFeedListener {
 			public void run() {
 				 adapter.addListNotice(list);
 				 adapter.notifyDataSetChanged();
-				 Toast.makeText(activity, "Another notice.", Toast.LENGTH_SHORT)
+				Toast.makeText(activity, "Another notice.", Toast.LENGTH_SHORT)
 						.show();
 			}
 		});
