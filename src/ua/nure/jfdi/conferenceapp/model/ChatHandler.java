@@ -3,6 +3,7 @@ package ua.nure.jfdi.conferenceapp.model;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.io.StreamCorruptedException;
 import java.net.Socket;
 import java.util.ArrayList;
 import java.util.List;
@@ -21,7 +22,16 @@ public class ChatHandler {
 	List<IUpdateChatListener> chatListeners;
 
 	public void setSocketConnection(Socket givenSocket) {
-
+		socket = givenSocket;
+		try {
+			reader = new ObjectInputStream(socket.getInputStream());
+			writer = new ObjectOutputStream(socket.getOutputStream());
+		} catch (StreamCorruptedException e) {
+			// TODO Auto-generated catch block
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+		}
+		
 	}
 
 	public ChatHandler() {
@@ -34,7 +44,23 @@ public class ChatHandler {
 	}
 
 	public void runChatThread() {
-		// TODO Auto-generated method stub
+		Thread chatThread = new Thread(new Runnable(){
+			@Override
+			public void run(){
+				Message income;
+				try {
+					while ((income = ((Message)reader.readObject())) != null) {
+						for(IUpdateChatListener l : chatListeners){
+							l.onUpdateChat(income);
+						}
+					}
+
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		});
+		chatThread.start();
 
 	}
 
