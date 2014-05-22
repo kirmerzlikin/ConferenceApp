@@ -8,6 +8,9 @@ import ua.nure.jfdi.conferenceapp.controller.ConnectionController;
 
 import android.app.ActionBar;
 import android.app.FragmentTransaction;
+import android.content.Context;
+import android.net.wifi.WifiInfo;
+import android.net.wifi.WifiManager;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
@@ -40,6 +43,17 @@ public class MainActivity extends FragmentActivity implements
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
+		
+		WifiManager wifiManager = (WifiManager) getSystemService(Context.WIFI_SERVICE);
+		WifiInfo wInfo = wifiManager.getConnectionInfo();
+		String macAddress = wInfo.getMacAddress();
+		
+		controller = new ConnectionController();
+		if(! controller.setUpConnection(macAddress, 
+				(FeedFragment) mSectionsPagerAdapter.getItem(0),
+				(ChatFragment) mSectionsPagerAdapter.getItem(0))){
+			
+		}
 
 		// Set up the action bar.
 		final ActionBar actionBar = getActionBar();
@@ -75,9 +89,6 @@ public class MainActivity extends FragmentActivity implements
 					.setText(mSectionsPagerAdapter.getPageTitle(i))
 					.setTabListener(this));
 		}
-		
-		controller = new ConnectionController();
-		controller.setUpConnection();
 	}
 
 	@Override
@@ -111,7 +122,7 @@ public class MainActivity extends FragmentActivity implements
 	 */
 	public class SectionsPagerAdapter extends FragmentPagerAdapter {
 
-		Fragment fragmentList [];
+		Fragment fragmentList[];
 
 		public SectionsPagerAdapter(FragmentManager fm) {
 			super(fm);

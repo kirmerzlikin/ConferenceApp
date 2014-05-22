@@ -1,6 +1,7 @@
 package ua.nure.jfdi.conferenceapp.view;
 
 import ua.nure.jfdi.conferenceapp.R;
+import ua.nure.jfdi.conferenceapp.entities.Message;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -16,7 +17,7 @@ import android.widget.LinearLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
 
-public class ChatFragment extends Fragment {
+public class ChatFragment extends Fragment implements IUpdateChatListener {
 
 	/**
 	 * The fragment argument representing the section number for this fragment.
@@ -115,5 +116,11 @@ public class ChatFragment extends Fragment {
 			scrollContainer.scrollTo(0, messagesContainer.getBottom());
 			editText.setText("");
 		}
+	}
+
+	@Override
+	public void onUpdateChat(Message m) {
+		// TODO Auto-generated method stub
+		
 	}
 }
