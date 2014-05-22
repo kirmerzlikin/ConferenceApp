@@ -76,7 +76,7 @@ public class FeedAdapter extends BaseAdapter {
 		return convertView;
 	}
 
-	public void addNotice(Notice notice) {
-		data.add(notice);
+	public void addListNotice(List<Notice> notices) {
+		data.addAll(notices);
 	}	
 }

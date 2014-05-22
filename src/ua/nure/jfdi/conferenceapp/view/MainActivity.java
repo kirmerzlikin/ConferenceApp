@@ -3,6 +3,7 @@ package ua.nure.jfdi.conferenceapp.view;
 import java.util.Locale;
 
 import ua.nure.jfdi.conferenceapp.R;
+import ua.nure.jfdi.conferenceapp.model.FeedHandler;
 import android.app.ActionBar;
 import android.app.FragmentTransaction;
 import android.os.Bundle;
@@ -116,7 +117,7 @@ public class MainActivity extends FragmentActivity implements
 				args.putInt(FeedFragment.ARG_SECTION_NUMBER, position + 1);
 				fragment.setArguments(args);
 				FeedFragment ff = (FeedFragment) fragment;
-				ff.runTimer(MainActivity.this);
+				ff.setActivity(MainActivity.this);
 			} else {
 				fragment = new ChatFragment();
 				Bundle args = new Bundle();
