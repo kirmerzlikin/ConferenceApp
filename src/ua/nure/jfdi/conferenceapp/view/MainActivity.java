@@ -3,7 +3,9 @@ package ua.nure.jfdi.conferenceapp.view;
 import java.util.Locale;
 
 import ua.nure.jfdi.conferenceapp.R;
+
 import ua.nure.jfdi.conferenceapp.controller.ConnectionController;
+
 import android.app.ActionBar;
 import android.app.FragmentTransaction;
 import android.content.Context;
@@ -87,6 +89,13 @@ public class MainActivity extends FragmentActivity implements
 					.setText(mSectionsPagerAdapter.getPageTitle(i))
 					.setTabListener(this));
 		}
+		
+		controller = new ConnectionController();
+		if(! controller.setUpConnection(macAddress, 
+				(FeedFragment) mSectionsPagerAdapter.getItem(0),
+				(ChatFragment) mSectionsPagerAdapter.getItem(1))){
+			
+		}
 	}
 
 	@Override
@@ -137,6 +146,8 @@ public class MainActivity extends FragmentActivity implements
 					args.putInt(FeedFragment.ARG_SECTION_NUMBER, position + 1);
 					fragment.setArguments(args);
 					fragmentList[position] = fragment;
+					FeedFragment temp = (FeedFragment) fragment;
+					temp.setActivity(MainActivity.this);
 				}
 				fragment = fragmentList[position];
 
