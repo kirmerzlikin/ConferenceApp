@@ -1,5 +1,7 @@
 package ua.nure.jfdi.conferenceapp.view;
 
+import java.util.Date;
+
 import ua.nure.jfdi.conferenceapp.R;
 import ua.nure.jfdi.conferenceapp.entities.Message;
 import android.app.Activity;
@@ -50,10 +52,10 @@ public class ChatFragment extends Fragment implements IUpdateChatListener {
 
 			@Override
 			public void onClick(View v) {
-				showMessage(editText.getText().toString(), null, null, false,
-						rootView, messagesContainer, scrollContainer);
 				MainActivity act = (MainActivity) activity;
 				act.controller.sendMessage(editText.getText().toString());
+				showMessage(editText.getText().toString(), null, null, false,
+						rootView, messagesContainer, scrollContainer);
 			}
 		});
 
@@ -124,9 +126,14 @@ public class ChatFragment extends Fragment implements IUpdateChatListener {
 	}
 
 	@Override
-	public void onUpdateChat(Message m) {
-		showMessage(m.getText(), m.getAuthor(), String.valueOf(m.getDate()),
-				true, rootView, messagesContainer, scrollContainer);
+	public void onUpdateChat(final Message m) {
+		activity.runOnUiThread(new Runnable() {
+			@Override
+			public void run() {
+				showMessage(m.getText(), m.getAuthor(), String.valueOf(new Date(m.getDate()).toString()),
+						true, rootView, messagesContainer, scrollContainer);				
+			}
+		});
 	}
 
 	public void setActivity(Activity activity) {

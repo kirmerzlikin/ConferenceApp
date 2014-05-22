@@ -22,8 +22,10 @@ public class ChatHandler {
 	ObjectInputStream reader;
 
 	List<IUpdateChatListener> chatListeners;
-	
+
 	DataAdapter dataAdapter;
+
+	long currentDate;
 
 	public void setSocketConnection(Socket givenSocket) {
 		socket = givenSocket;
@@ -35,7 +37,7 @@ public class ChatHandler {
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 		}
-		
+
 	}
 
 	public ChatHandler(Context context) {
@@ -49,14 +51,16 @@ public class ChatHandler {
 	}
 
 	public void runChatThread() {
-		Thread chatThread = new Thread(new Runnable(){
+		Thread chatThread = new Thread(new Runnable() {
 			@Override
-			public void run(){
+			public void run() {
 				Message income;
 				try {
-					while ((income = ((Message)reader.readObject())) != null) {
-						for(IUpdateChatListener l : chatListeners){
-							l.onUpdateChat(income);
+					while ((income = ((Message) reader.readObject())) != null) {
+						for (IUpdateChatListener l : chatListeners) {
+							if (income.getDate() != currentDate) {
+								l.onUpdateChat(income);
+							}
 						}
 					}
 
@@ -71,7 +75,9 @@ public class ChatHandler {
 
 	public void sendMessage(String message) {
 		try {
-			Message m = new Message(dataAdapter.getUserName(), message, new Date().getTime());
+			currentDate = new Date().getTime();
+			Message m = new Message(dataAdapter.getUserName(), message,
+					currentDate);
 			writer.writeObject(m);
 			writer.flush();
 		} catch (IOException e) {
