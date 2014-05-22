@@ -115,7 +115,12 @@ public class MainActivity extends FragmentActivity implements
 				Bundle args = new Bundle();
 				args.putInt(FeedFragment.ARG_SECTION_NUMBER, position + 1);
 				fragment.setArguments(args);
+<<<<<<< HEAD
 				((FeedFragment) fragment).runTimer(MainActivity.this);
+=======
+				FeedFragment ff = (FeedFragment) fragment;
+				ff.runTimer(MainActivity.this);
+>>>>>>> branch 'master' of https://github.com/KirMerzlikin/ConferenceApp.git
 			} else {
 				fragment = new ChatFragment();
 				Bundle args = new Bundle();
