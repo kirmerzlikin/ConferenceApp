@@ -48,12 +48,6 @@ public class MainActivity extends FragmentActivity implements
 		WifiInfo wInfo = wifiManager.getConnectionInfo();
 		String macAddress = wInfo.getMacAddress();
 		
-		controller = new ConnectionController();
-		if(! controller.setUpConnection(macAddress, 
-				(FeedFragment) mSectionsPagerAdapter.getItem(0),
-				(ChatFragment) mSectionsPagerAdapter.getItem(0))){
-			
-		}
 
 		// Set up the action bar.
 		final ActionBar actionBar = getActionBar();
@@ -88,6 +82,13 @@ public class MainActivity extends FragmentActivity implements
 			actionBar.addTab(actionBar.newTab()
 					.setText(mSectionsPagerAdapter.getPageTitle(i))
 					.setTabListener(this));
+		}
+		
+		controller = new ConnectionController();
+		if(! controller.setUpConnection(macAddress, 
+				(FeedFragment) mSectionsPagerAdapter.getItem(0),
+				(ChatFragment) mSectionsPagerAdapter.getItem(1))){
+			
 		}
 	}
 
@@ -139,6 +140,8 @@ public class MainActivity extends FragmentActivity implements
 					args.putInt(FeedFragment.ARG_SECTION_NUMBER, position + 1);
 					fragment.setArguments(args);
 					fragmentList[position] = fragment;
+					FeedFragment temp = (FeedFragment) fragment;
+					temp.setActivity(MainActivity.this);
 				}
 				fragment = fragmentList[position];
 
