@@ -121,27 +121,27 @@ public class MainActivity extends FragmentActivity implements
 		@Override
 		public Fragment getItem(int position) {
 			Fragment fragment;
-			   if (position == 0) {
-			    if (fragmentList[position] == null) {
-			     fragment = new FeedFragment();
-			     Bundle args = new Bundle();
-			     args.putInt(FeedFragment.ARG_SECTION_NUMBER, position + 1);
-			     fragment.setArguments(args);
-			     fragmentList[position] =  fragment;
-			    }
-			    fragment = fragmentList[position];
+			if (position == 0) {
+				if (fragmentList[position] == null) {
+					fragment = new FeedFragment();
+					Bundle args = new Bundle();
+					args.putInt(FeedFragment.ARG_SECTION_NUMBER, position + 1);
+					fragment.setArguments(args);
+					fragmentList[position] = fragment;
+				}
+				fragment = fragmentList[position];
 
-			    } else {
-			    if (fragmentList[position] == null) {
-			     fragment = new ChatFragment();
-			     Bundle args = new Bundle();
-			     args.putInt(ChatFragment.ARG_SECTION_NUMBER, position + 1);
-			     fragment.setArguments(args);
-			     fragmentList[position] =  fragment;
-			    }
-			    fragment = fragmentList[position];
-			   }
-			   return fragment;
+			} else {
+				if (fragmentList[position] == null) {
+					fragment = new ChatFragment();
+					Bundle args = new Bundle();
+					args.putInt(ChatFragment.ARG_SECTION_NUMBER, position + 1);
+					fragment.setArguments(args);
+					fragmentList[position] = fragment;
+				}
+				fragment = fragmentList[position];
+			}
+			return fragment;
 		}
 
 		@Override
