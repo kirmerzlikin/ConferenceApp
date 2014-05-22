@@ -48,13 +48,6 @@ public class MainActivity extends FragmentActivity implements
 		WifiInfo wInfo = wifiManager.getConnectionInfo();
 		String macAddress = wInfo.getMacAddress();
 		
-		controller = new ConnectionController();
-		if(! controller.setUpConnection(macAddress, 
-				(FeedFragment) mSectionsPagerAdapter.getItem(0),
-				(ChatFragment) mSectionsPagerAdapter.getItem(1))){
-			
-		}
-
 		// Set up the action bar.
 		final ActionBar actionBar = getActionBar();
 		actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
