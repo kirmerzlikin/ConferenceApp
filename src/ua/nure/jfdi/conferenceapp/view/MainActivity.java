@@ -1,6 +1,5 @@
 package ua.nure.jfdi.conferenceapp.view;
 
-import java.lang.reflect.Field;
 import java.util.Locale;
 
 import ua.nure.jfdi.conferenceapp.R;
@@ -116,21 +115,7 @@ public class MainActivity extends FragmentActivity implements
 				Bundle args = new Bundle();
 				args.putInt(FeedFragment.ARG_SECTION_NUMBER, position + 1);
 				fragment.setArguments(args);
-				try {
-					Field field = SectionsPagerAdapter.class
-							.getDeclaredField("this$0");
-					field.setAccessible(true);
-					FragmentActivity activity = (FragmentActivity) field
-							.get(this);
-					FeedFragment ff = (FeedFragment) fragment;
-					ff.runTimer(activity);
-				} catch (NoSuchFieldException e) {
-					e.printStackTrace();
-				} catch (IllegalArgumentException e) {
-					e.printStackTrace();
-				} catch (IllegalAccessException e) {
-					e.printStackTrace();
-				}
+				((FeedFragment) fragment).runTimer(MainActivity.this);
 			} else {
 				fragment = new ChatFragment();
 				Bundle args = new Bundle();
