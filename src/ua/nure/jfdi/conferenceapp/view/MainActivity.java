@@ -1,7 +1,5 @@
 package ua.nure.jfdi.conferenceapp.view;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Locale;
 
 import ua.nure.jfdi.conferenceapp.R;
@@ -127,12 +125,11 @@ public class MainActivity extends FragmentActivity implements
 					Bundle args = new Bundle();
 					args.putInt(FeedFragment.ARG_SECTION_NUMBER, position + 1);
 					fragment.setArguments(args);
-					((FeedFragment) fragment).runTimer(MainActivity.this);
 					fragmentList[position] =  fragment;
 				}
 				fragment = fragmentList[position];
 
-			} else {
+				} else {
 				if (fragmentList[position] == null) {
 					fragment = new ChatFragment();
 					Bundle args = new Bundle();

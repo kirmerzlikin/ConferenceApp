@@ -2,8 +2,6 @@ package ua.nure.jfdi.conferenceapp.view;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Timer;
-import java.util.TimerTask;
 
 import ua.nure.jfdi.conferenceapp.R;
 import ua.nure.jfdi.conferenceapp.entities.Notice;
@@ -16,13 +14,14 @@ import android.view.ViewGroup;
 import android.widget.ListView;
 import android.widget.Toast;
 
-public class FeedFragment extends Fragment {
+public class FeedFragment extends Fragment implements IUpdateFeedListener {
 
 	/**
 	 * The fragment argument representing the section number for this fragment.
 	 */
 	public static final String ARG_SECTION_NUMBER = "section_number";
 
+	Activity activity;
 	ListView listView;
 	FeedAdapter adapter;
 
@@ -49,23 +48,21 @@ public class FeedFragment extends Fragment {
 		return rootView;
 	}
 
-	public void runTimer(final Activity activity) {
-		Timer timer = new Timer();
-		timer.schedule(new TimerTask() {
+	public void setActivity(Activity activity) {
+		this.activity = activity;
+	}
+
+	@Override
+	public void onUpdateFeed(final List<Notice> list) {
+		activity.runOnUiThread(new Runnable() {
 			@Override
 			public void run() {
-				activity.runOnUiThread(new Runnable() {
-					@Override
-					public void run() {
-						//adapter.addNotice(new Notice("Title1", "Text1",
-						//		641564648));
-						//adapter.notifyDataSetChanged();
-						Toast.makeText(activity, "Another notice.", Toast.LENGTH_SHORT).show();;
-					}
-				});
-
+				 adapter.addListNotice(list);
+				 adapter.notifyDataSetChanged();
+				 Toast.makeText(activity, "Another notice.", Toast.LENGTH_SHORT)
+						.show();
 			}
-		}, 15000, 15000);
+		});
 	}
 
 }
