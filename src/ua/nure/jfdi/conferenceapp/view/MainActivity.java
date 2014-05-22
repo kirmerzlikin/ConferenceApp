@@ -151,6 +151,8 @@ public class MainActivity extends FragmentActivity implements
 					args.putInt(ChatFragment.ARG_SECTION_NUMBER, position + 1);
 					fragment.setArguments(args);
 					fragmentList[position] = fragment;
+					ChatFragment temp = (ChatFragment) fragment;
+					temp.setActivity(MainActivity.this);
 				}
 				fragment = fragmentList[position];
 			}

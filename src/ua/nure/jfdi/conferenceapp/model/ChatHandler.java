@@ -6,10 +6,12 @@ import java.io.ObjectOutputStream;
 import java.io.StreamCorruptedException;
 import java.net.Socket;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import ua.nure.jfdi.conferenceapp.entities.Message;
 import ua.nure.jfdi.conferenceapp.view.IUpdateChatListener;
+import android.content.Context;
 
 public class ChatHandler {
 
@@ -20,6 +22,8 @@ public class ChatHandler {
 	ObjectInputStream reader;
 
 	List<IUpdateChatListener> chatListeners;
+	
+	DataAdapter dataAdapter;
 
 	public void setSocketConnection(Socket givenSocket) {
 		socket = givenSocket;
@@ -34,8 +38,9 @@ public class ChatHandler {
 		
 	}
 
-	public ChatHandler() {
+	public ChatHandler(Context context) {
 		chatListeners = new ArrayList<IUpdateChatListener>();
+		dataAdapter = new DataAdapter(context);
 	}
 
 	public void addListener(IUpdateChatListener cL) {
@@ -64,8 +69,9 @@ public class ChatHandler {
 
 	}
 
-	public void sendMessage(Message m) {
+	public void sendMessage(String message) {
 		try {
+			Message m = new Message(dataAdapter.getUserName(), message, new Date().getTime());
 			writer.writeObject(m);
 			writer.flush();
 		} catch (IOException e) {

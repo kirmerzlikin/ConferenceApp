@@ -18,17 +18,16 @@ public class ConnectionCreator {
 
 		Thread connectionThread = new Thread(new Runnable() {
 			@Override
-			public void run(){
-				/*try {
-					Socket socket = new Socket(
-							"10.0.2.2", 50000);
+			public void run() {
+				try {
+					Socket socket = new Socket("10.0.2.2", 50000);
 					cH.setSocketConnection(socket);
 				} catch (UnknownHostException e) {
 					// TODO Auto-generated catch block
 				} catch (IOException e) {
 					// TODO Auto-generated catch block
-				}*/			
 				}
+			}
 		});
 
 		connectionThread.start();
