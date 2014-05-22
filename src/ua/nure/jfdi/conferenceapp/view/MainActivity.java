@@ -1,8 +1,11 @@
 package ua.nure.jfdi.conferenceapp.view;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Locale;
 
 import ua.nure.jfdi.conferenceapp.R;
+import ua.nure.jfdi.conferenceapp.controller.ConnectionController;
 import android.app.ActionBar;
 import android.app.FragmentTransaction;
 import android.os.Bundle;
@@ -25,6 +28,8 @@ public class MainActivity extends FragmentActivity implements
 	 * {@link android.support.v4.app.FragmentStatePagerAdapter}.
 	 */
 	SectionsPagerAdapter mSectionsPagerAdapter;
+
+	ConnectionController controller;
 
 	/**
 	 * The {@link ViewPager} that will host the section contents.
@@ -70,6 +75,9 @@ public class MainActivity extends FragmentActivity implements
 					.setText(mSectionsPagerAdapter.getPageTitle(i))
 					.setTabListener(this));
 		}
+		
+		controller = new ConnectionController();
+		controller.setUpConnection();
 	}
 
 	@Override
@@ -103,29 +111,36 @@ public class MainActivity extends FragmentActivity implements
 	 */
 	public class SectionsPagerAdapter extends FragmentPagerAdapter {
 
+		Fragment fragmentList [];
+
 		public SectionsPagerAdapter(FragmentManager fm) {
 			super(fm);
+			fragmentList = new Fragment[2];
 		}
 
 		@Override
 		public Fragment getItem(int position) {
 			Fragment fragment;
 			if (position == 0) {
-				fragment = new FeedFragment();
-				Bundle args = new Bundle();
-				args.putInt(FeedFragment.ARG_SECTION_NUMBER, position + 1);
-				fragment.setArguments(args);
-<<<<<<< HEAD
-				((FeedFragment) fragment).runTimer(MainActivity.this);
-=======
-				FeedFragment ff = (FeedFragment) fragment;
-				ff.runTimer(MainActivity.this);
->>>>>>> branch 'master' of https://github.com/KirMerzlikin/ConferenceApp.git
+				if (fragmentList[position] == null) {
+					fragment = new FeedFragment();
+					Bundle args = new Bundle();
+					args.putInt(FeedFragment.ARG_SECTION_NUMBER, position + 1);
+					fragment.setArguments(args);
+					((FeedFragment) fragment).runTimer(MainActivity.this);
+					fragmentList[position] =  fragment;
+				}
+				fragment = fragmentList[position];
+
 			} else {
-				fragment = new ChatFragment();
-				Bundle args = new Bundle();
-				args.putInt(ChatFragment.ARG_SECTION_NUMBER, position + 1);
-				fragment.setArguments(args);
+				if (fragmentList[position] == null) {
+					fragment = new ChatFragment();
+					Bundle args = new Bundle();
+					args.putInt(ChatFragment.ARG_SECTION_NUMBER, position + 1);
+					fragment.setArguments(args);
+					fragmentList[position] =  fragment;
+				}
+				fragment = fragmentList[position];
 			}
 			return fragment;
 		}
