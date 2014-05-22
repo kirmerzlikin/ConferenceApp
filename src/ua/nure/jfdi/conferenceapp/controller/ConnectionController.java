@@ -6,14 +6,15 @@ import ua.nure.jfdi.conferenceapp.model.ConnectionCreator;
 import ua.nure.jfdi.conferenceapp.model.FeedHandler;
 import ua.nure.jfdi.conferenceapp.view.IUpdateChatListener;
 import ua.nure.jfdi.conferenceapp.view.IUpdateFeedListener;
+import android.content.Context;
 
 public class ConnectionController {
 	
 	FeedHandler fH;
 	ChatHandler cH;
 	
-	public ConnectionController(){
-		fH = new FeedHandler();
+	public ConnectionController(Context context){
+		fH = new FeedHandler(context);
 		cH = new ChatHandler();
 	}
 	

@@ -35,14 +35,6 @@ public class FeedFragment extends Fragment implements IUpdateFeedListener {
 				container, false);
 		listView = (ListView) rootView.findViewById(R.id.list);// stub
 		List<Notice> list = new ArrayList<Notice>();// stub
-		list.add(new Notice("Title1", "Text1", 641564648));// stub
-		list.add(new Notice(
-				"Title1",
-				"Text2Text2Text2Text2Text2Text2Text2Text2Text2Text2T"
-						+ "ext2Text2Text2Text2Text2Text2Text2Text2Text2Text2Te"
-						+ "xt2Text2Text2Text2Text2Text2Text2Text2Text2Text2Tex"
-						+ "t2Text2Text2Text2Text2Text2Text2Text2Text2Text2Text2Text2Text2Text2Text2Text2",
-				456465546));// stub
 		adapter = new FeedAdapter(inflater, list);
 		listView.setAdapter(adapter);
 		return rootView;
@@ -57,10 +49,12 @@ public class FeedFragment extends Fragment implements IUpdateFeedListener {
 		activity.runOnUiThread(new Runnable() {
 			@Override
 			public void run() {
-				 adapter.addListNotice(list);
-				 adapter.notifyDataSetChanged();
-				Toast.makeText(activity, "Another notice.", Toast.LENGTH_SHORT)
-						.show();
+				adapter.addListNotice(list);
+				adapter.notifyDataSetChanged();
+				if (!list.isEmpty()) {
+					Toast.makeText(activity, "New notice.", Toast.LENGTH_SHORT)
+							.show();
+				}
 			}
 		});
 	}

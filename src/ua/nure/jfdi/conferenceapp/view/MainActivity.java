@@ -83,7 +83,7 @@ public class MainActivity extends FragmentActivity implements
 					.setTabListener(this));
 		}
 		
-		controller = new ConnectionController();
+		controller = new ConnectionController(this);
 		if(! controller.setUpConnection(macAddress, 
 				(FeedFragment) mSectionsPagerAdapter.getItem(0),
 				(ChatFragment) mSectionsPagerAdapter.getItem(1))){

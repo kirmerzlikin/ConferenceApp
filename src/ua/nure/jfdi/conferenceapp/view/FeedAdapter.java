@@ -77,6 +77,6 @@ public class FeedAdapter extends BaseAdapter {
 	}
 
 	public void addListNotice(List<Notice> notices) {
-		data.addAll(notices);
+		data.addAll(0, notices);;
 	}	
 }
