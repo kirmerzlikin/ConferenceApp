@@ -6,7 +6,7 @@ public class ConnectionCreator {
 
 	Socket socket;
 
-	public void initializeConnection(FeedHandler fH, ChatHandler cH) {
+	public void initializeConnection(String macAddress, FeedHandler fH, ChatHandler cH) {
 		
 
 	}

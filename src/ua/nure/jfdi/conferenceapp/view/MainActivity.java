@@ -49,7 +49,7 @@ public class MainActivity extends FragmentActivity implements
 		controller = new ConnectionController();
 		if(! controller.setUpConnection(macAddress, 
 				(FeedFragment) mSectionsPagerAdapter.getItem(0),
-				(ChatFragment) mSectionsPagerAdapter.getItem(0))){
+				(ChatFragment) mSectionsPagerAdapter.getItem(1))){
 			
 		}
 

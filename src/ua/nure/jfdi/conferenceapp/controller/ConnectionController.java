@@ -19,7 +19,7 @@ public class ConnectionController {
 	
 	public boolean setUpConnection(String macAddress, IUpdateFeedListener fL, IUpdateChatListener cL){
 		ConnectionCreator creator = new ConnectionCreator();
-		creator.initializeConnection(fH, cH);
+		creator.initializeConnection(macAddress, fH, cH);
 		fH.addListener(fL);
 		cH.addListener(cL);
 		
