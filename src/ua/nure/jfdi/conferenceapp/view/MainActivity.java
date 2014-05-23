@@ -3,27 +3,25 @@ package ua.nure.jfdi.conferenceapp.view;
 import java.util.Locale;
 
 import ua.nure.jfdi.conferenceapp.R;
-import ua.nure.jfdi.conferenceapp.Settings;
 import ua.nure.jfdi.conferenceapp.controller.ConnectionController;
+import ua.nure.jfdi.conferenceapp.model.DataAdapter;
 import android.app.ActionBar;
 import android.app.FragmentTransaction;
 import android.content.Context;
-import android.content.Intent;
 import android.net.wifi.WifiInfo;
 import android.net.wifi.WifiManager;
 import android.os.Bundle;
+import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.view.Menu;
-import android.view.View;
-import android.view.View.OnClickListener;
 import android.widget.Button;
 
 public class MainActivity extends FragmentActivity implements
-		ActionBar.TabListener {
+		ActionBar.TabListener, SigninDialog.DialogListener {
 
 	/**
 	 * The {@link android.support.v4.view.PagerAdapter} that will provide
@@ -41,7 +39,9 @@ public class MainActivity extends FragmentActivity implements
 	 * The {@link ViewPager} that will host the section contents.
 	 */
 	ViewPager mViewPager;
+
 	Button settingbutton;
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -50,7 +50,7 @@ public class MainActivity extends FragmentActivity implements
 		WifiManager wifiManager = (WifiManager) getSystemService(Context.WIFI_SERVICE);
 		WifiInfo wInfo = wifiManager.getConnectionInfo();
 		String macAddress = wInfo.getMacAddress();
-		
+
 		// Set up the action bar.
 		final ActionBar actionBar = getActionBar();
 		actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
@@ -87,22 +87,14 @@ public class MainActivity extends FragmentActivity implements
 		}
 		
 		controller = new ConnectionController(this);
-		if(! controller.setUpConnection(macAddress, 
+		if (!controller.setUpConnection(macAddress,
 				(FeedFragment) mSectionsPagerAdapter.getItem(0),
-				(ChatFragment) mSectionsPagerAdapter.getItem(1))){
-			
+				(ChatFragment) mSectionsPagerAdapter.getItem(1))) {
+
 		}
 		
-//		settingbutton = (Button) findViewById(R.id.action_settings);
-//
-//		OnClickListener oclBtnOk = new OnClickListener() {
-//			@Override
-//			public void onClick(View v) {
-//				Intent intent = new Intent(null, Settings.class);
-//				startActivity(intent);
-//			}
-//		};
-//		settingbutton.setOnClickListener(oclBtnOk);
+		DialogFragment newFragment = new SigninDialog();
+	    newFragment.show(getSupportFragmentManager(), "missiles");
 	}
 
 	@Override
@@ -190,5 +182,12 @@ public class MainActivity extends FragmentActivity implements
 			}
 			return null;
 		}
+	}
+
+	@Override
+	public void onDialogPositiveClick(DialogFragment dialog) {
+		DataAdapter da = new DataAdapter(this);
+		da.setUserName(((SigninDialog)dialog).getName(), "");
+		
 	}
 }
