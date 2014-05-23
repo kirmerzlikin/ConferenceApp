@@ -9,6 +9,7 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.text.format.DateFormat;
+import android.text.method.ScrollingMovementMethod;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -19,6 +20,7 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ScrollView;
+import android.widget.Scroller;
 import android.widget.TextView;
 
 public class ChatFragment extends Fragment implements IUpdateChatListener {
@@ -49,14 +51,20 @@ public class ChatFragment extends Fragment implements IUpdateChatListener {
 				.findViewById(R.id.scrollContainer);
 		Button sendMessageButton = (Button) rootView
 				.findViewById(R.id.sendButton);
+		editText.setScroller(new Scroller(activity)); 
+		editText.setMaxLines(3); 
+		editText.setVerticalScrollBarEnabled(true); 
+		editText.setMovementMethod(new ScrollingMovementMethod()); 
 		sendMessageButton.setOnClickListener(new OnClickListener() {
 
 			@Override
 			public void onClick(View v) {
-				MainActivity act = (MainActivity) activity;
-				act.controller.sendMessage(editText.getText().toString());
-				showMessage(editText.getText().toString(), null, null, false,
-						rootView, messagesContainer, scrollContainer);
+				if (!editText.getText().toString().isEmpty()) {
+					MainActivity act = (MainActivity) activity;
+					act.controller.sendMessage(editText.getText().toString());
+					showMessage(editText.getText().toString(), null, null,
+							false, rootView, messagesContainer, scrollContainer);
+				}
 			}
 		});
 
@@ -125,17 +133,23 @@ public class ChatFragment extends Fragment implements IUpdateChatListener {
 		scrollContainer.post(new Runnable() {
 			public void run() {
 				scrollContainer.fullScroll(ScrollView.FOCUS_DOWN);
+				editText.requestFocus();
 			}
 		});
+
 	}
 
 	@Override
 	public void onUpdateChat(final Message m) {
 		activity.runOnUiThread(new Runnable() {
 			@Override
-			public void run() {			
-				showMessage(m.getText(), m.getAuthor(), DateFormat.format("MM-dd hh:mm:ss", new  Date(m.getDate())).toString(),
-						true, rootView, messagesContainer, scrollContainer);	
+			public void run() {
+				showMessage(
+						m.getText(),
+						m.getAuthor(),
+						DateFormat.format("MM-dd hh:mm:ss",
+								new Date(m.getDate())).toString(), true,
+						rootView, messagesContainer, scrollContainer);
 			}
 		});
 	}
