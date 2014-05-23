@@ -57,7 +57,7 @@ public class FeedAdapter extends BaseAdapter {
 		textButton.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				if (text.getMaxHeight() == 40) {
+				if (text.getMaxHeight() <= 200) {
 					text.setMaxHeight(1000);
 					textButton.setText("Hide");
 				} else {

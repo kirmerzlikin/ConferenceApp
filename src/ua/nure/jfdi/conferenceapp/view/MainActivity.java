@@ -93,16 +93,16 @@ public class MainActivity extends FragmentActivity implements
 			
 		}
 		
-	    settingbutton=(Button) findViewById(R.id.action_settings);
-	    
-	    OnClickListener oclBtnOk = new OnClickListener() {
-	        @Override
-	        public void onClick(View v) {
-	        	Intent intent = new Intent(null, Settings.class);
-	            startActivity(intent);	         
-	        }
-	      };
-	      settingbutton.setOnClickListener(oclBtnOk);
+//		settingbutton = (Button) findViewById(R.id.action_settings);
+//
+//		OnClickListener oclBtnOk = new OnClickListener() {
+//			@Override
+//			public void onClick(View v) {
+//				Intent intent = new Intent(null, Settings.class);
+//				startActivity(intent);
+//			}
+//		};
+//		settingbutton.setOnClickListener(oclBtnOk);
 	}
 
 	@Override
