@@ -120,7 +120,12 @@ public class ChatFragment extends Fragment implements IUpdateChatListener {
 			textView.setLayoutParams(paramsTV);
 			linearLayoutMessage.addView(textView);
 			messagesContainer.addView(linearLayout);
-			scrollContainer.scrollTo(0, messagesContainer.getBottom());
+			//scrollContainer.scrollTo(0, scrollContainer.getBottom());
+			scrollContainer.post(new Runnable() {
+				public void run() {
+					scrollContainer.fullScroll(ScrollView.FOCUS_DOWN);
+				}
+			});
 			editText.setText("");
 		}
 	}
@@ -130,8 +135,9 @@ public class ChatFragment extends Fragment implements IUpdateChatListener {
 		activity.runOnUiThread(new Runnable() {
 			@Override
 			public void run() {
-				showMessage(m.getText(), m.getAuthor(), String.valueOf(new Date(m.getDate()).toString()),
-						true, rootView, messagesContainer, scrollContainer);				
+				showMessage(m.getText(), m.getAuthor(),
+						String.valueOf(new Date(m.getDate()).toString()), true,
+						rootView, messagesContainer, scrollContainer);
 			}
 		});
 	}
