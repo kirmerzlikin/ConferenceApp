@@ -52,6 +52,6 @@
         android:layout_alignParentRight="true"
         android:layout_below="@id/feed_item_text"
         android:text="Show more"
-        android:textSize="8dp" />
+        android:textSize="12dp" />
 
 </RelativeLayout>
