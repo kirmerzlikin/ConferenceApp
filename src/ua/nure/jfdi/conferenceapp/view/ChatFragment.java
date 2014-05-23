@@ -8,6 +8,7 @@ import android.app.Activity;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.text.format.DateFormat;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -78,7 +79,7 @@ public class ChatFragment extends Fragment implements IUpdateChatListener {
 			textView.setBackgroundResource(bgRes);
 			messagesContainer.addView(textView);
 			scrollContainer.scrollTo(0, messagesContainer.getBottom());
-			// editText.setText("");
+			editText.setText("");
 		} else {
 			final LinearLayout linearLayout = new LinearLayout(
 					root.getContext());
@@ -129,8 +130,8 @@ public class ChatFragment extends Fragment implements IUpdateChatListener {
 	public void onUpdateChat(final Message m) {
 		activity.runOnUiThread(new Runnable() {
 			@Override
-			public void run() {
-				showMessage(m.getText(), m.getAuthor(), String.valueOf(new Date(m.getDate()).toString()),
+			public void run() {			
+				showMessage(m.getText(), m.getAuthor(), DateFormat.format("yyyy-MM-dd hh:mm:ss", new  Date(m.getDate())).toString(),
 						true, rootView, messagesContainer, scrollContainer);				
 			}
 		});
