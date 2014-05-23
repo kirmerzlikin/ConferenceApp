@@ -93,7 +93,7 @@ public class MainActivity extends FragmentActivity implements
 			
 		}
 		
-	settingbutton=(Button) findViewById(R.id.action_settings);
+	    settingbutton=(Button) findViewById(R.id.action_settings);
 	    
 	    OnClickListener oclBtnOk = new OnClickListener() {
 	        @Override
