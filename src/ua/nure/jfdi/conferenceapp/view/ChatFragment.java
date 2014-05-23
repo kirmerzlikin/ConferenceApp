@@ -1,7 +1,10 @@
 package ua.nure.jfdi.conferenceapp.view;
 
+import java.util.Date;
+
 import ua.nure.jfdi.conferenceapp.R;
 import ua.nure.jfdi.conferenceapp.entities.Message;
+import android.app.Activity;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -25,19 +28,23 @@ public class ChatFragment extends Fragment implements IUpdateChatListener {
 
 	public static final String ARG_SECTION_NUMBER = "section_number";
 
+	View rootView = null;
+	EditText editText = null;
+	ViewGroup messagesContainer = null;
+	ScrollView scrollContainer = null;
+	Activity activity;
+
 	public ChatFragment() {
 	}
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
-		final View rootView = inflater.inflate(R.layout.fragment_chat,
-				container, false);
-		final EditText editText = (EditText) rootView
-				.findViewById(R.id.messageEdit);
-		final ViewGroup messagesContainer = (ViewGroup) rootView
+		rootView = inflater.inflate(R.layout.fragment_chat, container, false);
+		editText = (EditText) rootView.findViewById(R.id.messageEdit);
+		messagesContainer = (ViewGroup) rootView
 				.findViewById(R.id.messagesContainer);
-		final ScrollView scrollContainer = (ScrollView) rootView
+		scrollContainer = (ScrollView) rootView
 				.findViewById(R.id.scrollContainer);
 		Button sendMessageButton = (Button) rootView
 				.findViewById(R.id.sendButton);
@@ -45,9 +52,9 @@ public class ChatFragment extends Fragment implements IUpdateChatListener {
 
 			@Override
 			public void onClick(View v) {
-				showMessage(editText, null, null, false, rootView,
-						messagesContainer, scrollContainer);
-				showMessage(editText, "Иван Петров", "20.05.2014", true,
+				MainActivity act = (MainActivity) activity;
+				act.controller.sendMessage(editText.getText().toString());
+				showMessage(editText.getText().toString(), null, null, false,
 						rootView, messagesContainer, scrollContainer);
 			}
 		});
@@ -55,13 +62,13 @@ public class ChatFragment extends Fragment implements IUpdateChatListener {
 		return rootView;
 	}
 
-	void showMessage(EditText editText, String author, String date,
-			boolean leftSide, View root, final ViewGroup messagesContainer,
+	void showMessage(String text, String author, String date, boolean leftSide,
+			View root, final ViewGroup messagesContainer,
 			final ScrollView scrollContainer) {
 		if (!leftSide) {
 			final TextView textView = new TextView(root.getContext());
 			textView.setTextColor(Color.BLACK);
-			textView.setText(editText.getText().toString());
+			textView.setText(text);
 			LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(
 					LinearLayout.LayoutParams.WRAP_CONTENT,
 					LinearLayout.LayoutParams.WRAP_CONTENT);
@@ -105,7 +112,7 @@ public class ChatFragment extends Fragment implements IUpdateChatListener {
 			linearLayoutMessage.addView(textViewAuthor);
 			final TextView textView = new TextView(linearLayout.getContext());
 			textView.setTextColor(Color.BLACK);
-			textView.setText(editText.getText().toString());
+			textView.setText(text);
 			textView.setBackgroundResource(R.drawable.left_message_bg);
 			LinearLayout.LayoutParams paramsTV = new LinearLayout.LayoutParams(
 					LinearLayout.LayoutParams.WRAP_CONTENT,
@@ -119,8 +126,17 @@ public class ChatFragment extends Fragment implements IUpdateChatListener {
 	}
 
 	@Override
-	public void onUpdateChat(Message m) {
-		// TODO Auto-generated method stub
-		
+	public void onUpdateChat(final Message m) {
+		activity.runOnUiThread(new Runnable() {
+			@Override
+			public void run() {
+				showMessage(m.getText(), m.getAuthor(), String.valueOf(new Date(m.getDate()).toString()),
+						true, rootView, messagesContainer, scrollContainer);				
+			}
+		});
+	}
+
+	public void setActivity(Activity activity) {
+		this.activity = activity;
 	}
 }

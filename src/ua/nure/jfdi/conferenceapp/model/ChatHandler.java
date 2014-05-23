@@ -6,10 +6,12 @@ import java.io.ObjectOutputStream;
 import java.io.StreamCorruptedException;
 import java.net.Socket;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import ua.nure.jfdi.conferenceapp.entities.Message;
 import ua.nure.jfdi.conferenceapp.view.IUpdateChatListener;
+import android.content.Context;
 
 public class ChatHandler {
 
@@ -21,6 +23,10 @@ public class ChatHandler {
 
 	List<IUpdateChatListener> chatListeners;
 
+	DataAdapter dataAdapter;
+
+	long currentDate;
+
 	public void setSocketConnection(Socket givenSocket) {
 		socket = givenSocket;
 		try {
@@ -31,11 +37,12 @@ public class ChatHandler {
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 		}
-		
+
 	}
 
-	public ChatHandler() {
+	public ChatHandler(Context context) {
 		chatListeners = new ArrayList<IUpdateChatListener>();
+		dataAdapter = new DataAdapter(context);
 	}
 
 	public void addListener(IUpdateChatListener cL) {
@@ -44,14 +51,16 @@ public class ChatHandler {
 	}
 
 	public void runChatThread() {
-		Thread chatThread = new Thread(new Runnable(){
+		Thread chatThread = new Thread(new Runnable() {
 			@Override
-			public void run(){
+			public void run() {
 				Message income;
 				try {
-					while ((income = ((Message)reader.readObject())) != null) {
-						for(IUpdateChatListener l : chatListeners){
-							l.onUpdateChat(income);
+					while ((income = ((Message) reader.readObject())) != null) {
+						for (IUpdateChatListener l : chatListeners) {
+							if (income.getDate() != currentDate) {
+								l.onUpdateChat(income);
+							}
 						}
 					}
 
@@ -64,8 +73,11 @@ public class ChatHandler {
 
 	}
 
-	public void sendMessage(Message m) {
+	public void sendMessage(String message) {
 		try {
+			currentDate = new Date().getTime();
+			Message m = new Message(dataAdapter.getUserName(), message,
+					currentDate);
 			writer.writeObject(m);
 			writer.flush();
 		} catch (IOException e) {
