@@ -3,12 +3,12 @@ package ua.nure.jfdi.conferenceapp.view;
 import java.util.Locale;
 
 import ua.nure.jfdi.conferenceapp.R;
-
+import ua.nure.jfdi.conferenceapp.Settings;
 import ua.nure.jfdi.conferenceapp.controller.ConnectionController;
-
 import android.app.ActionBar;
 import android.app.FragmentTransaction;
 import android.content.Context;
+import android.content.Intent;
 import android.net.wifi.WifiInfo;
 import android.net.wifi.WifiManager;
 import android.os.Bundle;
@@ -18,6 +18,9 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.view.Menu;
+import android.view.View;
+import android.view.View.OnClickListener;
+import android.widget.Button;
 
 public class MainActivity extends FragmentActivity implements
 		ActionBar.TabListener {
@@ -38,7 +41,7 @@ public class MainActivity extends FragmentActivity implements
 	 * The {@link ViewPager} that will host the section contents.
 	 */
 	ViewPager mViewPager;
-
+	Button settingbutton;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -89,6 +92,17 @@ public class MainActivity extends FragmentActivity implements
 				(ChatFragment) mSectionsPagerAdapter.getItem(1))){
 			
 		}
+		
+	settingbutton=(Button) findViewById(R.id.action_settings);
+	    
+	    OnClickListener oclBtnOk = new OnClickListener() {
+	        @Override
+	        public void onClick(View v) {
+	        	Intent intent = new Intent(null, Settings.class);
+	            startActivity(intent);	         
+	        }
+	      };
+	      settingbutton.setOnClickListener(oclBtnOk);
 	}
 
 	@Override
