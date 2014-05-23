@@ -74,11 +74,11 @@ public class ChatFragment extends Fragment implements IUpdateChatListener {
 					LinearLayout.LayoutParams.WRAP_CONTENT,
 					LinearLayout.LayoutParams.WRAP_CONTENT);
 			int bgRes = R.drawable.right_message_bg;
+			params.setMargins(0, 9, 0, 0);
 			params.gravity = Gravity.RIGHT;
 			textView.setLayoutParams(params);
 			textView.setBackgroundResource(bgRes);
 			messagesContainer.addView(textView);
-			scrollContainer.scrollTo(0, messagesContainer.getBottom());
 			editText.setText("");
 		} else {
 			final LinearLayout linearLayout = new LinearLayout(
@@ -107,7 +107,7 @@ public class ChatFragment extends Fragment implements IUpdateChatListener {
 			LinearLayout.LayoutParams paramsTVA = new LinearLayout.LayoutParams(
 					LinearLayout.LayoutParams.WRAP_CONTENT,
 					LinearLayout.LayoutParams.WRAP_CONTENT);
-			textViewAuthor.setTextSize(8);
+			textViewAuthor.setTextSize(9);
 			textViewAuthor.setLayoutParams(paramsTVA);
 			textViewAuthor.setPadding(7, 0, 0, 0);
 			linearLayoutMessage.addView(textViewAuthor);
@@ -121,14 +121,12 @@ public class ChatFragment extends Fragment implements IUpdateChatListener {
 			textView.setLayoutParams(paramsTV);
 			linearLayoutMessage.addView(textView);
 			messagesContainer.addView(linearLayout);
-			//scrollContainer.scrollTo(0, scrollContainer.getBottom());
-			scrollContainer.post(new Runnable() {
-				public void run() {
-					scrollContainer.fullScroll(ScrollView.FOCUS_DOWN);
-				}
-			});
-			editText.setText("");
 		}
+		scrollContainer.post(new Runnable() {
+			public void run() {
+				scrollContainer.fullScroll(ScrollView.FOCUS_DOWN);
+			}
+		});
 	}
 
 	@Override
@@ -136,7 +134,7 @@ public class ChatFragment extends Fragment implements IUpdateChatListener {
 		activity.runOnUiThread(new Runnable() {
 			@Override
 			public void run() {			
-				showMessage(m.getText(), m.getAuthor(), DateFormat.format("yyyy-MM-dd hh:mm:ss", new  Date(m.getDate())).toString(),
+				showMessage(m.getText(), m.getAuthor(), DateFormat.format("MM-dd hh:mm:ss", new  Date(m.getDate())).toString(),
 						true, rootView, messagesContainer, scrollContainer);	
 			}
 		});

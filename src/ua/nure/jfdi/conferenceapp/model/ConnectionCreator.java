@@ -20,8 +20,8 @@ public class ConnectionCreator {
 			@Override
 			public void run() {
 				try {
-					//Socket socket = new Socket("159.253.134.253", 20340);
-					Socket socket = new Socket("10.0.2.2", 50000);
+					Socket socket = new Socket("159.253.134.253", 20340);
+					//Socket socket = new Socket("10.0.2.2", 50000);
 					cH.setSocketConnection(socket);
 				} catch (UnknownHostException e) {
 					// TODO Auto-generated catch block
