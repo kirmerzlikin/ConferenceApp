@@ -1,6 +1,9 @@
 package ua.nure.jfdi.conferenceapp.view;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.TimeZone;
 
 import ua.nure.jfdi.conferenceapp.R;
 import ua.nure.jfdi.conferenceapp.entities.Message;
@@ -8,7 +11,6 @@ import android.app.Activity;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.text.format.DateFormat;
 import android.text.method.ScrollingMovementMethod;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -144,11 +146,13 @@ public class ChatFragment extends Fragment implements IUpdateChatListener {
 		activity.runOnUiThread(new Runnable() {
 			@Override
 			public void run() {
+				DateFormat df = new SimpleDateFormat("MM-dd hh:mm:ss");
+				df.setTimeZone(TimeZone.getDefault());
+				
 				showMessage(
 						m.getText(),
 						m.getAuthor(),
-						DateFormat.format("MM-dd hh:mm:ss",
-								new Date(m.getDate())).toString(), true,
+						df.format(m.getDate()), true,
 						rootView, messagesContainer, scrollContainer);
 			}
 		});
