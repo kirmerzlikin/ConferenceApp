@@ -52,7 +52,7 @@ public class ChatFragment extends Fragment implements IUpdateChatListener {
 		Button sendMessageButton = (Button) rootView
 				.findViewById(R.id.sendButton);
 		editText.setScroller(new Scroller(activity)); 
-		editText.setMaxLines(3); 
+		editText.setMaxLines(2); 
 		editText.setVerticalScrollBarEnabled(true); 
 		editText.setMovementMethod(new ScrollingMovementMethod()); 
 		sendMessageButton.setOnClickListener(new OnClickListener() {
